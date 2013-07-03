@@ -1,0 +1,24 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ast (1.1.0)
+    backports (3.3.3)
+    castic (0.2.0)
+    curb (0.8.4)
+    descendants_tracker (0.0.1)
+    parser (1.4.2)
+      ast (~> 1.0)
+      slop (~> 3.4)
+    slop (3.4.5)
+    virtus (0.5.5)
+      backports (~> 3.3)
+      descendants_tracker (~> 0.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  castic
+  curb
+  parser
+  virtus
