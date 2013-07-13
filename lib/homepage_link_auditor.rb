@@ -1,7 +1,10 @@
 require 'curb'
 class HomepageLinkAuditor
+  attr_reader :cask, :cask_name
+
   def initialize(cask)
-    @cask = cask  
+    @cask = cask
+    @cask_name = cask.name
   end
 
   def check(reporter)

@@ -1,9 +1,10 @@
 class DownloadAuditor
-  attr_reader :cask, :download_path
+  attr_reader :cask, :download_path, :cask_name
 
   def initialize(cask)
     @cask = cask
     @download_path =  "/tmp/#{cask.name}"
+    @cask_name = cask_name
   end
 
   def check(reporter)

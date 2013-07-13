@@ -2,16 +2,28 @@ require_relative './lib/cask'
 require_relative './lib/cask_repository'
 require_relative './lib/download_auditor'
 require_relative './lib/homepage_link_auditor'
+require_relative './lib/debug_reporter'
+require_relative './lib/git_hub_issue_reporter'
 
-class Reporter
-  def report(check, outcome, message="")
-    p check, outcome, message
+auditors = [HomepageLinkAuditor, DownloadAuditor]
+
+class DistributingReporter
+  def initialize(reporters)
+    @reporters = reporters
+  end
+
+  def report(*args)
+    @reporters.each { |r| r.report(*args) }
   end
 end
 
+class GitHubClient
+  def create_issue(*args)
+    pp args
+  end
+end
 
-auditors = [HomepageLinkAuditor, DownloadAuditor]
-reporter = Reporter.new
+reporter = DistributingReporter.new([DebugReporter.new, GitHubIssueReporter.new(GitHubClient.new)])
 
 CaskRepository.all.each do |cask|
   auditors.each do |auditor| 
