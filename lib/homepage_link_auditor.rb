@@ -15,5 +15,7 @@ class HomepageLinkAuditor
     else
       reporter.report(self, :failed, response)
     end
+  rescue Curl::Err::ConnectionFailedError => e
+    reporter.report(self, :failed, e.message)
   end
 end
