@@ -4,7 +4,7 @@ class DownloadAuditor
   def initialize(cask)
     @cask = cask
     @download_path =  "/tmp/#{cask.name}"
-    @cask_name = cask_name
+    @cask_name = cask.name
   end
 
   def check(reporter)
@@ -18,7 +18,7 @@ class DownloadAuditor
 
   private
   def hash_matches?(cask)
-    cask.sha1 == sha1(download_path)
+    cask.sha1 == sha1(download_path).strip!  
   end
 
   def download(cask)
