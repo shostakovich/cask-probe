@@ -4,18 +4,9 @@ require_relative './lib/download_auditor'
 require_relative './lib/homepage_link_auditor'
 require_relative './lib/debug_reporter'
 require_relative './lib/git_hub_issue_reporter'
+require_relative './lib/distributing_reporter'
 
 auditors = [HomepageLinkAuditor, DownloadAuditor]
-
-class DistributingReporter
-  def initialize(reporters)
-    @reporters = reporters
-  end
-
-  def report(*args)
-    @reporters.each { |r| r.report(*args) }
-  end
-end
 
 class GitHubClient
   def create_issue(*args)
