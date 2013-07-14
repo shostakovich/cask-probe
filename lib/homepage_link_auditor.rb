@@ -8,14 +8,17 @@ class HomepageLinkAuditor
   end
 
   def check(reporter)
-    response = Curl::Easy.perform(@cask.homepage)
+    begin
+      response = Curl::Easy.perform(@cask.homepage)
+    rescue Curl::Err::ConnectionFailedError => e
+      return reporter.report(self, :failed, e.message)
+    end
 
-    if(response.status == '200 OK')
+    case response.status[/[0-9]+/]
+    when '200', '301', '302'
       reporter.report(self, :passed)
     else
-      reporter.report(self, :failed, response)
+      reporter.report(self, :failed, "Homepage link is broken")
     end
-  rescue Curl::Err::ConnectionFailedError => e
-    reporter.report(self, :failed, e.message)
   end
 end
