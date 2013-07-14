@@ -1,3 +1,4 @@
+require 'shellwords'
 class DownloadAuditor
   attr_reader :cask, :download_path, :cask_name
 
@@ -22,7 +23,7 @@ class DownloadAuditor
   end
 
   def download(cask)
-    `curl -Ls #{cask.url} > #{download_path}`
+    `curl -Ls #{Shellwords.escape(cask.url)} > #{download_path}`
   end
 
   def sha1(file)
