@@ -4,6 +4,7 @@ gem 'parser'
 gem 'virtus'
 gem 'curb'
 gem 'octokit'
+gem 'sidekiq'
 
 gem 'rspec'
 gem 'simplecov'
